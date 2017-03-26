@@ -1,0 +1,10 @@
+{
+  "name": "contigo-posts",
+  "version": "1.0.0",
+  "description": "posts with comments",
+  "author": "Pierre Larochelle <pierrebombay@gmail.com>",
+  "license": "GPL v3",
+  "dependencies": {
+    "uuid": "^2.0.3"
+  }
+}
