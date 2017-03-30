@@ -5,19 +5,7 @@ const AWS = require('aws-sdk');
 
 const dynamoDb = new AWS.DynamoDB.DocumentClient();
 
-module.exports.hello = (event, context, callback) => {
-  const response = {
-    statusCode: 200,
-    body: JSON.stringify({
-      message: 'Go Serverless v1.0! Your function executed successfully!'
-    }),
-  };
-
-  callback(null, response);
-
-};
-
-module.exports.create_post = (event, context, callback) => {
+module.exports.endpoint = (event, context, callback) => {
   const data = JSON.parse(event.body);
   const requirements = ['content', 'type', 'author'];
 

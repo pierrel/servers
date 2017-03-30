@@ -38,20 +38,13 @@ provider:
       Resource: "arn:aws:dynamodb:${opt:region, self:provider.region}:*:table/${self:provider.environment.POSTS_TABLE}"
 
 functions:
-  hello:
-    handler: handler.hello
-    events:
-      - http:
-          path: hello
-          method: get
   create_post:
-    handler: handler.create_post
+    handler: api/create_post.endpoint
     events:
       - http:
           path: posts
           method: post
           cors: true
-
 
 resources:
   Resources:
@@ -69,4 +62,3 @@ resources:
           ReadCapacityUnits: 1
           WriteCapacityUnits: 1
         TableName: ${self:provider.environment.POSTS_TABLE}
-
