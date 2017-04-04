@@ -8,6 +8,7 @@ const dynamoDb = new AWS.DynamoDB.DocumentClient();
 module.exports.endpoint = (event, context, callback) => {
   const data = JSON.parse(event.body);
   const requirements = ['content', 'type', 'author'];
+  const room = 'contigo';
 
   for (var i = 0; i < requirements.length; i++) {
     const requirement = requirements[i];
@@ -26,8 +27,8 @@ module.exports.endpoint = (event, context, callback) => {
       content: data.content,
       author: data.author,
       type: data.type,
-      createAt: timestamp,
-      updatedAt: timestamp
+      createdAt: timestamp,
+      room: room
     }
   };
 
