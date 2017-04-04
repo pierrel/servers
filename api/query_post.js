@@ -1,18 +1,32 @@
-'use strict';
-
 const AWS = require('aws-sdk');
 
 const dynamoDb = new AWS.DynamoDB.DocumentClient();
 
 module.exports.endpoint = (event, context, callback) => {
-  const data = JSON.parse(event.body);
-  const lastId = data.lastId;
-  const limit = 20;
+  const room = 'contigo';
 
-  callback(null, {
-    statusCode: 200,
-    body: JSON.stringify({
-      message: `Starting at ${lastId} and getting ${limit} posts`
-    })
+  const dynamoParams = {
+    TableName: process.env.POSTS_TABLE,
+    IndexName: 'room-createdAt-index',
+    KeyConditions: {
+      room: {
+        AttributeValueList: [{ S: room }],
+        ComparisonOperator: 'EQ',
+      },
+    },
+  };
+
+  dynamoDb.query(dynamoParams, (error, result) => {
+    if (error) {
+      console.error('querying: ', error);
+      callback(new Error("Couldn't query the room ", room));
+    } else {
+      callback(null, {
+        statusCode: 200,
+        body: JSON.stringify({
+          message: `got ${result.Items.length} items`,
+        }),
+      });
+    }
   });
 };
