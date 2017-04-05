@@ -22,9 +22,7 @@ module.exports.endpoint = (event, context, callback) => {
     } else {
       callback(null, {
         statusCode: 200,
-        body: JSON.stringify({
-          message: `got ${result.Items.length} items`,
-        }),
+        body: JSON.stringify(result.Items),
       });
     }
   });
