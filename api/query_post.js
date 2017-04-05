@@ -8,12 +8,11 @@ module.exports.endpoint = (event, context, callback) => {
   const dynamoParams = {
     TableName: process.env.POSTS_TABLE,
     IndexName: 'room-createdAt-index',
-    KeyConditions: {
-      room: {
-        AttributeValueList: [{ S: room }],
-        ComparisonOperator: 'EQ',
-      },
+    KeyConditionExpression: 'room = :room',
+    ExpressionAttributeValues: {
+      ':room': room,
     },
+    ReturnConsumedCapacity: 'TOTAL',
   };
 
   dynamoDb.query(dynamoParams, (error, result) => {
