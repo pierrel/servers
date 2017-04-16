@@ -71,3 +71,6 @@ resources:
           ReadCapacityUnits: 1
           WriteCapacityUnits: 1
         TableName: ${self:provider.environment.POSTS_TABLE}
+
+plugins:
+  - serverless-offline
