@@ -1,5 +1,3 @@
-'use strict';
-
 const uuid = require('uuid');
 const AWS = require('../lib/my-aws');
 
@@ -10,14 +8,15 @@ module.exports.endpoint = (event, context, callback) => {
   const requirements = ['content', 'type', 'author'];
   const room = 'contigo';
 
-  for (var i = 0; i < requirements.length; i++) {
-    const requirement = requirements[i];
+  requirements.some((requirement) => {
     if (typeof data[requirement] !== 'string') {
       console.error('Validation failed!');
       callback(new Error("Couldn't create post"));
-      return;
+      return true;
     }
-  }
+
+    return false;
+  });
   const timestamp = data.timestamp || new Date().getTime();
 
   const params = {
@@ -28,20 +27,20 @@ module.exports.endpoint = (event, context, callback) => {
       author: data.author,
       type: data.type,
       createdAt: timestamp,
-      room: room
-    }
+      room,
+    },
   };
 
   dynamoDb.put(params, (error, result) => {
     if (error) {
-      console.error("Adding post: ", error);
+      console.error('Adding post: ', error);
       callback(new Error("Couldn't create the post"));
       return;
     }
 
     const response = {
       statusCode: 200,
-      body: JSON.stringify(result.Item)
+      body: JSON.stringify(result.Item),
     };
 
     callback(null, response);
