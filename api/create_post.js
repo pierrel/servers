@@ -1,7 +1,7 @@
 'use strict';
 
 const uuid = require('uuid');
-const AWS = require('aws-sdk');
+const AWS = require('../lib/my-aws');
 
 const dynamoDb = new AWS.DynamoDB.DocumentClient();
 

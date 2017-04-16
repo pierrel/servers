@@ -26,6 +26,7 @@ provider:
   region: us-west-1
   environment:
     POSTS_TABLE: ${self:service}-posts-${opt:stage, self:provider.stage}
+    REGION: ${opt:region, self:provider.region}
   iamRoleStatements:
     - Effect: Allow
       Action:
