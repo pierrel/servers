@@ -1,22 +1,19 @@
-const uuid = require('uuid');
 const AWS = require('../lib/my-aws');
+const uuid = require('uuid');
+const validate = require('../lib/validation.js');
 
 const dynamoDb = new AWS.DynamoDB.DocumentClient();
 
 module.exports.endpoint = (event, context, callback) => {
   const data = JSON.parse(event.body);
-  const requirements = ['content', 'type', 'author'];
   const room = 'contigo';
 
-  requirements.some((requirement) => {
-    if (typeof data[requirement] !== 'string') {
-      console.error('Validation failed!');
-      callback(new Error("Couldn't create post"));
-      return true;
-    }
-
-    return false;
-  });
+  console.log('validating');
+  const validationErrors = validate.post_create(data);
+  if (validationErrors) {
+    console.error('Validation failed!');
+    callback(new Error("Couldn't create post: ", validationErrors));
+  }
   const timestamp = data.timestamp || new Date().getTime();
 
   const params = {
