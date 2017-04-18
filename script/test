@@ -1,0 +1,3 @@
+#!/bin/bash
+
+./script/lint && ./node_modules/.bin/qunit
