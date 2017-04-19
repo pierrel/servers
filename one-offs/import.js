@@ -1,0 +1,22 @@
+const fs = require('fs');
+
+console.log('processing ', process.argv[2]);
+const fileContents = fs.readFileSync(process.argv[2], 'utf8');
+const obj = JSON.parse(fileContents);
+console.log('done reading');
+
+const done = obj.filter((post) => {
+  const comments = post.comments;
+  if (comments) {
+    return comments.length > 0;
+  }
+
+  return false;
+}).map(post => ({
+  author: post.comments[0].author,
+  content: post.post.content,
+  type: post.post.type,
+}));
+
+console.log(JSON.stringify(done[0]));
+console.log('done');
