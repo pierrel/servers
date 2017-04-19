@@ -10,12 +10,21 @@ qunit.test('a valid post without a timestamp', (assert) => {
   }, undefined));
 });
 
-qunit.test('a valid post with timestamp', (assert) => {
+qunit.test('a valid post with timestamp as a date', (assert) => {
   assert.equal(validate.postCreate({
     author: 'New Amaral',
     content: 'https://github.com/serverless/examples/tree/master/aws-node-rest-api-with-dynamodb',
     type: 'link',
     timestamp: '2017-01-02',
+  }, undefined));
+});
+
+qunit.test('a valid post with timestamp as a time', (assert) => {
+  assert.equal(validate.postCreate({
+    author: 'New Amaral',
+    content: 'https://github.com/serverless/examples/tree/master/aws-node-rest-api-with-dynamodb',
+    type: 'link',
+    timestamp: '2017-01-02 12:00',
   }, undefined));
 });
 
