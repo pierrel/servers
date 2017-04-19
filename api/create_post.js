@@ -9,7 +9,7 @@ module.exports.endpoint = (event, context, callback) => {
   const room = 'contigo';
 
   console.log('validating');
-  const validationErrors = validate.post_create(data);
+  const validationErrors = validate.postCreate(data);
   if (validationErrors) {
     console.error('Validation failed!');
     callback(new Error("Couldn't create post: ", validationErrors));
