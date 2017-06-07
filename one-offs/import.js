@@ -18,6 +18,13 @@ const done = obj.filter((post) => {
   author: post.comments[0].author,
   content: post.post.content,
   type: post.post.type,
+  timestamp: Date.parse(post.comments[0].date),
+  comments: post.comments.map(comment => ({
+    author: comment.author,
+    content: comment.content,
+    type: comment.type,
+    timestamp: Date.parse(comment.date),
+  })),
 }));
 
 console.log(JSON.stringify(done[0]));
