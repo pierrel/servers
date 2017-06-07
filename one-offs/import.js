@@ -27,5 +27,11 @@ const done = obj.filter((post) => {
   })),
 }));
 
-console.log(JSON.stringify(done[0]));
+console.log(done.length);
+done.forEach((post) => {
+  if (post.type !== 'image') {
+    console.log(JSON.stringify(post));
+  }
+});
 console.log('done');
+
