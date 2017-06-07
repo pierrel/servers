@@ -1,3 +1,5 @@
+// run with (from parent dir) `node ./one-offs/import.js /path/to/data.json
+
 const fs = require('fs');
 
 console.log('processing ', process.argv[2]);
