@@ -9,7 +9,8 @@
     "serverless": "^1.10.2",
     "uuid": "^2.0.3",
     "validate.js": "0.11.1",
-    "moment": "2.18.1"
+    "moment": "2.18.1",
+    "request": "2.81.0"
   },
   "devDependencies": {
     "eslint": "^3.19.0",

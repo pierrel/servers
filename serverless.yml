@@ -48,6 +48,13 @@ functions:
           path: posts
           method: post
           cors: true
+  enqueue_post:
+    handler: api/enqueue_post.endpoint
+    events:
+      - http:
+          path: enqueue
+          method: post
+          cors: true
   query_post:
     handler: api/query_post.endpoint
     events:
