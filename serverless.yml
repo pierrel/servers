@@ -42,26 +42,36 @@ provider:
 
 functions:
   create_post:
-    handler: api/create_post.endpoint
+    handler: src/api/create_post.endpoint
     events:
       - http:
           path: posts
           method: post
           cors: true
   enqueue_post:
-    handler: api/enqueue_post.endpoint
+    handler: src/api/enqueue_post.endpoint
     events:
       - http:
           path: enqueue
           method: post
           cors: true
   query_post:
-    handler: api/query_post.endpoint
+    handler: src/api/query_post.endpoint
     events:
       - http:
           path: posts
           method: get
           cors: true
+  auth_example:
+    handler: src/api/test_auth.endpoint
+    events:
+      - http:
+          path: auth_test_whatever
+          method: get
+          cors: true
+          authorizer: auth
+  auth:
+    handler: src/lib/auth.endpoint
           
 resources:
   Resources:

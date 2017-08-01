@@ -1,4 +1,4 @@
-const validate = require('../lib/validation.js');
+const validate = require('../src/lib/validation.js');
 
 const qunit = QUnit; // eslint-disable-line no-undef
 

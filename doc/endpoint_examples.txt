@@ -1,0 +1,6 @@
+Create a post
+curl -X POST https://xgee9twa7j.execute-api.us-west-1.amazonaws.com/dev/posts --data '{ "author": "Pierre Larochelle", "content": "https://github.com/serverless/examples/tree/master/aws-node-rest-api-with-dynamodb", "type": "link"}'
+
+
+Get posts
+curl -X GET https://xgee9twa7j.execute-api.us-west-1.amazonaws.com/dev/posts

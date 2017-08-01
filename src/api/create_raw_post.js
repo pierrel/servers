@@ -9,10 +9,10 @@ module.exports.endpoint = (event, context, callback) => {
   const room = 'contigo';
 
   console.log('validating');
-  const validationErrors = validate.postCreate(data);
+  const validationErrors = validate.postCreateRaw(data);
   if (validationErrors) {
     console.error('Validation failed!');
-    callback(new Error("Couldn't create post: ", validationErrors));
+    callback(new Error("Couldn't create raw post: ", validationErrors));
   }
   const timestamp = data.timestamp || new Date().getTime();
 
@@ -31,7 +31,7 @@ module.exports.endpoint = (event, context, callback) => {
   dynamoDb.put(params, (error, result) => {
     if (error) {
       console.error('Adding post: ', error);
-      callback(new Error("Couldn't create the post"));
+      callback(new Error("Couldn't create the raw post"));
       return;
     }
 
